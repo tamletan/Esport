@@ -23,42 +23,42 @@
         android:background="@drawable/edit_text_shape"
         android:focusable="true">
 
-        <TextView
-            android:id="@+id/tv_itemTime"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:gravity="center_vertical"
-            android:text="4:00\nPM"
-            android:textAlignment="center"
-            android:textSize="20dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_toRightOf="@+id/tv_itemTime">
+            android:layout_height="40dp"
+            android:id="@+id/header_item"
+            >
 
             <TextView
                 android:id="@+id/tv_itemTitle"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginRight="8dp"
-                android:gravity="center_vertical"
-                android:text="Day 1"
+                android:layout_alignParentLeft="true"
+                android:text="Title"
                 android:textSize="20dp"
                 android:textStyle="bold" />
-
             <TextView
-                android:id="@+id/tv_itemContent"
-                android:layout_width="match_parent"
+                android:id="@+id/tv_itemTime"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_below="@+id/tv_itemTitle"
-                android:layout_marginRight="8dp"
-                android:gravity="center_vertical"
-                android:inputType="text"
-                android:maxLines="1"
-                android:text="This is a good day\nHello!"
-                android:textSize="20dp" />
+                android:text="4:00 pm"
+                android:textSize="20dp"
+                android:layout_alignParentRight="true"
+                />
         </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_itemContent"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginRight="8dp"
+            android:layout_below="@+id/header_item"
+            android:gravity="center"
+            android:inputType="text"
+            android:maxLines="1"
+            android:text="Post 1"
+            android:textSize="20dp" />
 
     </RelativeLayout>
 

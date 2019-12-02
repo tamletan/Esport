@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/mn_main"
+        android:visible="true">
+        <item
+            android:id="@+id/mn_home"
+            android:icon="@drawable/ic_menu_home_24dp"
+            android:title="@string/menu_home" />
+
+        <item
+            android:id="@+id/mn_guide"
+            android:icon="@drawable/ic_menu_guide_24dp"
+            android:title="@string/menu_guide" />
+
+        <item
+            android:id="@+id/mn_news"
+            android:icon="@drawable/ic_menu_news_24dp"
+            android:title="@string/menu_news" />
+        <item
+            android:id="@+id/mn_update"
+            android:icon="@drawable/ic_menu_update_24dp"
+            android:title="@string/menu_update" />
+        <item
+            android:id="@+id/mn_tour"
+            android:icon="@drawable/ic_menu_tour_24dp"
+            android:title="@string/menu_tour" />
+        <item
+            android:id="@+id/mn_sp"
+            android:icon="@drawable/ic_menu_support_24dp"
+            android:title="@string/menu_support" />
+    </group>
+
+    <item android:title="@string/menu_manage"
+        android:id="@+id/mn_admin"
+        android:visible="false">
+        <menu>
+            <item
+                android:id="@+id/mn_posts"
+                android:icon="@drawable/post_24px"
+                android:title="@string/menu_post" />
+            <item
+                android:id="@+id/mn_catalog"
+                android:icon="@drawable/catalog_24px"
+                android:title="@string/menu_cata" />
+            <item
+                android:id="@+id/mn_users"
+                android:icon="@drawable/person_24px"
+                android:title="@string/menu_user" />
+            <item
+                android:id="@+id/mn_comments"
+                android:icon="@drawable/comment_24px"
+                android:title="@string/menu_cmt" />
+        </menu>
+    </item>
+
+    <item android:title="@string/menu_other">
+        <menu>
+            <item
+                android:id="@+id/mn_login"
+                android:icon="@drawable/login_24dp"
+                android:title="@string/menu_login"
+                android:visible="true" />
+            <item
+                android:id="@+id/mn_logout"
+                android:icon="@drawable/logout_24px"
+                android:title="@string/menu_logout"
+                android:visible="false" />
+        </menu>
+    </item>
+
+</menu>

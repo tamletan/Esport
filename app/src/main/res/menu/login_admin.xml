@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Manage">
+        <menu>
+            <item
+                android:id="@+id/mn_posts"
+                android:icon="@drawable/post_24px"
+                android:title="Posts management" />
+            <item
+                android:id="@+id/mn_catalog"
+                android:icon="@drawable/catalog_24px"
+                android:title="Catalog management" />
+            <item
+                android:id="@+id/mn_users"
+                android:icon="@drawable/person_24px"
+                android:title="Users management" />
+            <item
+                android:id="@+id/mn_comments"
+                android:icon="@drawable/comment_24px"
+                android:title="Comments management" />
+        </menu>
+    </item>
+    <item android:title="Setting">
+        <menu>
+            <item
+                android:id="@+id/mn_logout"
+                android:icon="@drawable/logout_24px"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+
+</menu>

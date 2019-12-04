@@ -1,17 +1,27 @@
 package com.example.esport;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder> {
     private ArrayList<E_News> ListData;
@@ -33,19 +43,14 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final E_News newsItem = ListData.get(position);
         holder.mTvTitle.setText(newsItem.getTitle());
-        holder.mTvContent.setText(newsItem.getContent());
-        holder.mTvPicture.setText(newsItem.getPicture());
+        holder.mTvTime.setText(newsItem.getTimeString());
+        Picasso.get().load(newsItem.getPicture()).into(holder.mTvPicture);
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-////                Intent intent = new Intent(view.getContext(), AddDiaryActivity.class);
-////                Bundle bundle = new Bundle();
-////                bundle.putSerializable("journalItem", journalItem);
-////                intent.putExtra("package", bundle);
-////                intent.putExtra("request", MainActivity.REQUEST_EDIT_JOURNAL);
-////                MainActivity.editIndex = position;
-////                ((Activity) view.getContext()).startActivityForResult(intent, MainActivity.REQUEST_EDIT_JOURNAL);
-                Toast.makeText(activity, newsItem.getTitle()+"-"+newsItem.getContent(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(view.getContext(), PostActivity.class);
+                intent.putExtra("content", newsItem.getContent());
+                activity.startActivity(intent);
             }
         });
     }
@@ -57,16 +62,17 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mTvTitle;
-        private TextView mTvContent;
-        private TextView mTvPicture;
+        private TextView mTvTime;
+        private ImageView mTvPicture;
         public RelativeLayout relativeLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mTvTitle = itemView.findViewById(R.id.tv_itemTitle);
-            mTvContent = itemView.findViewById(R.id.tv_itemContent);
-            mTvPicture = itemView.findViewById(R.id.tv_itemDate);
+            mTvPicture = itemView.findViewById(R.id.tv_itemPicture);
+            mTvTime = itemView.findViewById(R.id.tv_itemTime);
             relativeLayout = itemView.findViewById(R.id.relativeLayout);
         }
     }
+
 }

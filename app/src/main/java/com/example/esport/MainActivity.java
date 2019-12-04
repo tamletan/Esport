@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawer;
     NavigationView navigationView;
-    UserInfo info;
+    static public UserInfo info;
     private static int login = 1001;
     static public FirebaseAuth auth;
     FirebaseDatabase firebaseDb;
@@ -98,14 +98,6 @@ public class MainActivity extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new GuideFragment()).commit();
                 break;
-            case R.id.mn_news:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new NewsFragment()).commit();
-                break;
-            case R.id.mn_update:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new UpdateFragment()).commit();
-                break;
             case R.id.mn_tour:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new TourFragment()).commit();
@@ -138,6 +130,7 @@ public class MainActivity extends AppCompatActivity
                 AuthUI.getInstance().signOut(getApplicationContext()).
                         addOnCompleteListener(new OnCompleteListener<Void>() {
                             public void onComplete(@NonNull Task<Void> task) {
+                                info = null;
                                 navigationView.getMenu().findItem(R.id.mn_logout).setVisible(false);
                                 navigationView.getMenu().findItem(R.id.mn_login).setVisible(true);
                                 navigationView.getMenu().findItem(R.id.mn_admin).setVisible(false);
@@ -196,6 +189,9 @@ public class MainActivity extends AppCompatActivity
                 if (info.getRole().equals("user") || info.getRole().equals("employee")) {
                     navigationView.getMenu().findItem(R.id.mn_logout).setVisible(true);
                     navigationView.getMenu().findItem(R.id.mn_login).setVisible(false);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new HomeFragment()).commit();
+                    navigationView.setCheckedItem(R.id.mn_home);
                 }
                 mDbRoot.removeEventListener(this);
             }

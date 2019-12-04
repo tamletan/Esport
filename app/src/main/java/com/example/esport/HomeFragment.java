@@ -23,6 +23,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class HomeFragment extends Fragment {
     MyListAdapter adapter;
@@ -45,6 +47,22 @@ public class HomeFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getContext());
         mRvNewsList.setLayoutManager(mLayoutManager);
         mRvNewsList.setAdapter(adapter);
+        root.findViewById(R.id.fab_top).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRvNewsList.smoothScrollToPosition(0);
+            }
+        });
+        root.findViewById(R.id.add_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRvNewsList.smoothScrollToPosition(0);
+            }
+        });
+        if (MainActivity.info!=null && MainActivity.info.getRole().equals("employee"))
+            root.findViewById(R.id.add_btn).setVisibility(View.VISIBLE);
+        else
+            root.findViewById(R.id.add_btn).setVisibility(View.INVISIBLE);
         return root;
     }
 
@@ -55,7 +73,11 @@ public class HomeFragment extends Fragment {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (!dataSnapshot.exists()) {
-                                    E_News item1 = new E_News("Title", "Content", "Picture");
+                                    E_News item1 = new E_News("Chi tiết kỹ năng của Aphelios, Song Nguyệt Chiến Binh",
+                                            "https://i.imgur.com/gs82vtt.png",
+                                            "https://lienminh.garena.vn/images/Lan_h3lpm3/11_2019/Aphelios/lo_dien/Aphelios%20Ability%20Article.jpg",
+                                            Calendar.getInstance().getTime());
+                                    item1.setId("0");
                                     newsList.add(item1);
                                     mDbRoot.child("news").setValue(newsList)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -63,13 +85,7 @@ public class HomeFragment extends Fragment {
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
                                                         newsList.clear();
-                                                        Toast.makeText(getContext(),
-                                                                "Login successfully",
-                                                                Toast.LENGTH_SHORT).show();
                                                     } else {
-                                                        Toast.makeText(getContext(),
-                                                                "Add userId failed",
-                                                                Toast.LENGTH_SHORT).show();
                                                     }
                                                 }
                                             });

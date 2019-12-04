@@ -15,14 +15,6 @@
             android:title="@string/menu_guide" />
 
         <item
-            android:id="@+id/mn_news"
-            android:icon="@drawable/ic_menu_news_24dp"
-            android:title="@string/menu_news" />
-        <item
-            android:id="@+id/mn_update"
-            android:icon="@drawable/ic_menu_update_24dp"
-            android:title="@string/menu_update" />
-        <item
             android:id="@+id/mn_tour"
             android:icon="@drawable/ic_menu_tour_24dp"
             android:title="@string/menu_tour" />

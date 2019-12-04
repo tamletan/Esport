@@ -23,6 +23,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".PostActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
 

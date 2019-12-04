@@ -29,9 +29,18 @@
             android:paddingVertical="5dp"
             android:hint="  Search..."
             android:textStyle="italic"
-            android:background="@color/cardview_light_background"></EditText>
+            android:background="@color/cardview_light_background"/>
     </RelativeLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/abc_vector_test"
+        android:visibility="invisible"
+        android:layout_margin="@dimen/fab_margin"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_news"
@@ -40,13 +49,12 @@
         android:layout_below="@+id/header_home"
         android:layout_margin="@dimen/activity_vertical_margin" />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:src="@drawable/ic_up"
-        >
-
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+        android:layout_margin="@dimen/fab_margin"/>
 
 </RelativeLayout>

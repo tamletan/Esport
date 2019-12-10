@@ -5,61 +5,51 @@
     android:background="@drawable/bgmain"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/header_home"
-        android:orientation="horizontal"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:background="#585858"
-        android:layout_alignParentTop="true">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_alignParentLeft="true"
-            android:text="GUIDE"
-            android:textColor="#FF0000"
-            android:textSize="30dp"
-            android:textStyle="bold" />
+        android:gravity="center"
+        android:text="GUIDE"
+        android:textColor="#FF0000"
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
-    </RelativeLayout>
     <Button
-        android:id="@+id/btn_champ"
+        android:id="@+id/btn_champs"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:layout_above="@+id/btn_items"
         android:layout_centerVertical="true"
         android:text="CHAMPS"
-        android:textStyle="bold"
+        android:textColor="@color/colorWhite"
         android:textSize="30dp"
-        android:layout_above="@+id/btn_ITEMS"
-        />
+        android:textStyle="bold" />
+
     <Button
-        android:id="@+id/btn_ITEMS"
+        android:id="@+id/btn_items"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_centerVertical="true"
         android:text="ITEMS"
-        android:textStyle="bold"
-        android:textSize="30dp"/>
+        android:textColor="@color/colorWhite"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
     <Button
+        android:id="@+id/btn_runes"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:layout_below="@+id/btn_items"
         android:layout_centerVertical="true"
         android:text="RUNES"
-        android:layout_below="@+id/btn_ITEMS"
-        android:textStyle="bold"
-        android:textSize="30dp"/>
-
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/ic_up"
-        >
-
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+        android:textColor="@color/colorWhite"
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

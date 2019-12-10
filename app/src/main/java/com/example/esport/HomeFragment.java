@@ -29,7 +29,7 @@ import java.util.Date;
 public class HomeFragment extends Fragment {
     MyListAdapter adapter;
     ArrayList<E_News> newsList;
-    private DatabaseReference mDbRoot, mDbRef, mDbNews;
+    private DatabaseReference mDbRoot, mDbNews;
     private FirebaseDatabase firebaseDb;
     private LinearLayoutManager mLayoutManager;
     private RecyclerView mRvNewsList;
@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         firebaseDb = FirebaseDatabase.getInstance();
         mDbRoot = firebaseDb.getReference();
-        newsList = new ArrayList<E_News>();
+        newsList = new ArrayList<>();
         loadHomeFrag();
         mRvNewsList = root.findViewById(R.id.rv_news);
         adapter = new MyListAdapter(getActivity(), newsList);

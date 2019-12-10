@@ -43,7 +43,6 @@ public class PostActivity extends AppCompatActivity {
     }
     @Override
     public boolean onSupportNavigateUp() {
-//        setResult(RESULT_CANCELED);
         finish();
         return true;
     }

@@ -1,19 +1,18 @@
 package com.example.esport;
 
-public class E_Champs {
+public class E_GuidePost {
     private String id;
     private String name;
     private String content;
 
-    public E_Champs(String name, String content) {
-        this.id = id;
+    public E_GuidePost(String name, String content) {
         this.name = name;
         this.content = content;
     }
 
-    public E_Champs() {    }
+    public E_GuidePost() {    }
 
-    public E_Champs(E_Champs w) {
+    public E_GuidePost(E_GuidePost w) {
         this.id = w.getId();
         this.name = w.getName();
         this.content = w.getContent();

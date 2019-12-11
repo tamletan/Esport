@@ -6,41 +6,43 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/header_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/header_home"
-        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
         android:background="#585858"
-        android:layout_alignParentTop="true">
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:gravity="left"
             android:paddingLeft="60dp"
-            android:layout_alignParentLeft="true"
             android:text="HOME"
             android:textColor="#FF0000"
             android:textSize="30dp"
             android:textStyle="bold" />
+
         <EditText
             android:layout_width="160dp"
-            android:layout_alignParentRight="true"
             android:layout_height="wrap_content"
-            android:paddingVertical="5dp"
+            android:layout_alignParentRight="true"
+            android:background="@color/cardview_light_background"
             android:hint="  Search..."
-            android:textStyle="italic"
-            android:background="@color/cardview_light_background"/>
+            android:paddingVertical="5dp"
+            android:textStyle="italic" />
     </RelativeLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/abc_vector_test"
-        android:visibility="invisible"
-        android:layout_margin="@dimen/fab_margin"/>
+        android:visibility="invisible" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_news"
@@ -48,13 +50,16 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/header_home"
         android:layout_margin="@dimen/activity_vertical_margin" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/fab_margin"
+        android:backgroundTint="@color/colorTrans"
         android:src="@drawable/ic_up"
-        android:layout_margin="@dimen/fab_margin"/>
+        android:tint="@color/colorWhite" />
 
 </RelativeLayout>

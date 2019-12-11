@@ -9,12 +9,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,7 +26,7 @@ import java.util.ArrayList;
 
 public class ChampFragment extends Fragment {
     ArrayAdapter adapter;
-    ArrayList<E_Champs> champsList;
+    ArrayList<E_GuidePost> champsList;
     ArrayList<String> namesList;
     private DatabaseReference mDbRoot, mDbChamps;
     private FirebaseDatabase firebaseDb;
@@ -80,20 +78,17 @@ public class ChampFragment extends Fragment {
     }
 
     private void loadChampFrag() {
-        mDbRoot.child("guide").child("champ")
-                .addListenerForSingleValueEvent(
+        mDbChamps = mDbRoot.child("guide").child("champ");
+        mDbChamps.addListenerForSingleValueEvent(
                         new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (!dataSnapshot.exists()) {
-                                    E_Champs item1 = new E_Champs("Ashe",
+                                    E_GuidePost item1 = new E_GuidePost("Ashe",
                                             "https://i.imgur.com/HctTyC3.png");
                                     item1.setId("0");
                                     champsList.add(item1);
-                                    champsList.add(item1);
-                                    champsList.add(item1);
-                                    champsList.add(item1);
-                                    mDbRoot.child("guide").child("champ").setValue(champsList)
+                                    mDbChamps.setValue(champsList)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
@@ -114,13 +109,12 @@ public class ChampFragment extends Fragment {
                             }
                         }
                 );
-        mDbChamps = mDbRoot.child("guide").child("champ");
         mDbChamps.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 champsList.clear();
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
-                    E_Champs champs = d.getValue(E_Champs.class);
+                    E_GuidePost champs = d.getValue(E_GuidePost.class);
                     champsList.add(champs);
                     namesList.add(champs.getName());
                 }

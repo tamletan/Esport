@@ -8,5 +8,7 @@
     <color name="gray">#A4A4A4</color>
     <color name="blue">#0101DF</color>
     <color name="green">#3ADF00</color>
-    <color name="light_gray">#D8D8D8</color>s
+    <color name="light_gray">#D8D8D8</color>
+    <color name="colorTrans">#400101DF</color>
+    <color name="colorfab">#E60101DF</color>
 </resources>

@@ -11,6 +11,7 @@ public class E_News implements Serializable {
     private String content;
     private String picture;
     private Date time;
+    private String PostKey;
 
     public E_News(String title, String content, String pic, Date time) {
         this.title = title;
@@ -27,6 +28,14 @@ public class E_News implements Serializable {
         this.content = w.getContent();
         this.picture = w.getPicture();
         this.time = w.getTime();
+    }
+
+    public String getPostKey() {
+        return PostKey;
+    }
+
+    public void setPostKey(String postKey) {
+        this.PostKey = postKey;
     }
 
     public String getId() {

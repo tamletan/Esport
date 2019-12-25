@@ -1,14 +1,11 @@
-package com.example.esport;
+package com.example.esport.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +15,16 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.esport.Fragment.CatalogFragment;
+import com.example.esport.Fragment.CommentsFragment;
+import com.example.esport.Fragment.GuideFragment;
+import com.example.esport.Fragment.HomeFragment;
+import com.example.esport.Fragment.PostFragment;
+import com.example.esport.Fragment.SupportFragment;
+import com.example.esport.Fragment.TourFragment;
+import com.example.esport.Fragment.UsersFragment;
+import com.example.esport.R;
+import com.example.esport.UserInfo;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -30,9 +37,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.InputStream;
-import java.net.URL;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawer;
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity
     FirebaseDatabase firebaseDb;
     String mUid;
     DatabaseReference mDbRoot;
+    private static String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,6 +181,7 @@ public class MainActivity extends AppCompatActivity
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 info = dataSnapshot.getValue(UserInfo.class);
                 ((TextView) findViewById(R.id.nav_username)).setText(info.getUsername());
+                username = info.getUsername();
                 ((TextView) findViewById(R.id.nav_email)).setText(info.getEmail());
                 if (info.getRole().equals("admin")) {
                     navigationView.getMenu().findItem(R.id.mn_logout).setVisible(true);
@@ -201,5 +207,9 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+    }
+
+    public static String getUsername() {
+        return username;
     }
 }

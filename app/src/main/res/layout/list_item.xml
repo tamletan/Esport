@@ -11,12 +11,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:text="15-11-19 4:00 pm"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:textSize="15sp" />
         <ImageView
             android:id="@+id/tv_itemPicture"
             android:layout_width="match_parent"
             android:layout_height="150dp"
+            android:src="@drawable/aphelios"
             android:layout_below="@+id/tv_itemTime"
             android:layout_marginVertical="@dimen/activity_vertical_margin"
             android:gravity="center" />
@@ -24,6 +26,7 @@
             android:id="@+id/tv_itemTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Chi tiet ky nang Aphelios"
             android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
             android:textSize="25sp"
             android:layout_below="@+id/tv_itemPicture"

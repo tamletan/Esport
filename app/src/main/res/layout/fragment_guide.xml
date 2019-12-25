@@ -31,10 +31,10 @@
         android:text="CHAMPS"
         android:textStyle="bold"
         android:textSize="30dp"
-        android:layout_above="@+id/btn_ITEMS"
+        android:layout_above="@+id/btn_item"
         />
     <Button
-        android:id="@+id/btn_ITEMS"
+        android:id="@+id/btn_item"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_centerVertical="true"
@@ -42,11 +42,12 @@
         android:textStyle="bold"
         android:textSize="30dp"/>
     <Button
+        android:id="@+id/btn_rune"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_centerVertical="true"
         android:text="RUNES"
-        android:layout_below="@+id/btn_ITEMS"
+        android:layout_below="@+id/btn_item"
         android:textStyle="bold"
         android:textSize="30dp"/>
 

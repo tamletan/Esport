@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -179,27 +180,46 @@ public class MainActivity extends AppCompatActivity
         mDbRoot.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                info = dataSnapshot.getValue(UserInfo.class);
-                ((TextView) findViewById(R.id.nav_username)).setText(info.getUsername());
-                username = info.getUsername();
-                ((TextView) findViewById(R.id.nav_email)).setText(info.getEmail());
-                if (info.getRole().equals("admin")) {
-                    navigationView.getMenu().findItem(R.id.mn_logout).setVisible(true);
-                    navigationView.getMenu().findItem(R.id.mn_login).setVisible(false);
-                    navigationView.getMenu().setGroupVisible(R.id.mn_main, false);
-                    navigationView.getMenu().findItem(R.id.mn_admin).setVisible(true);
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new PostFragment()).commit();
-                    navigationView.setCheckedItem(R.id.mn_posts);
+                try {
+                    info = dataSnapshot.getValue(UserInfo.class);
+                    ((TextView) findViewById(R.id.nav_username)).setText(info.getUsername());
+                    username = info.getUsername();
+                    ((TextView) findViewById(R.id.nav_email)).setText(info.getEmail());
+                    if (info.getRole().equals("admin")) {
+                        navigationView.getMenu().findItem(R.id.mn_logout).setVisible(true);
+                        navigationView.getMenu().findItem(R.id.mn_login).setVisible(false);
+                        navigationView.getMenu().setGroupVisible(R.id.mn_main, false);
+                        navigationView.getMenu().findItem(R.id.mn_admin).setVisible(true);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new PostFragment()).commit();
+                        navigationView.setCheckedItem(R.id.mn_posts);
+                    }
+                    if (info.getRole().equals("user") || info.getRole().equals("employee")) {
+                        navigationView.getMenu().findItem(R.id.mn_logout).setVisible(true);
+                        navigationView.getMenu().findItem(R.id.mn_login).setVisible(false);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new HomeFragment()).commit();
+                        navigationView.setCheckedItem(R.id.mn_home);
+                    }
+                    mDbRoot.removeEventListener(this);
+                } catch (Exception e){
+                    AuthUI.getInstance().signOut(getApplicationContext()).
+                        addOnCompleteListener(new OnCompleteListener<Void>() {
+                            public void onComplete(@NonNull Task<Void> task) {
+                            info = null;
+                            navigationView.getMenu().findItem(R.id.mn_logout).setVisible(false);
+                            navigationView.getMenu().findItem(R.id.mn_login).setVisible(true);
+                            navigationView.getMenu().findItem(R.id.mn_admin).setVisible(false);
+                            navigationView.getMenu().setGroupVisible(R.id.mn_main, true);
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                    new HomeFragment()).commit();
+                            navigationView.setCheckedItem(R.id.mn_home);
+                            ((TextView) findViewById(R.id.nav_username)).setText(R.string.acc_name);
+                            ((TextView) findViewById(R.id.nav_email)).setText(R.string.acc_email);
+                            }
+                        });
+                    Toast.makeText(MainActivity.this, "Your account has been removed", Toast.LENGTH_SHORT).show();
                 }
-                if (info.getRole().equals("user") || info.getRole().equals("employee")) {
-                    navigationView.getMenu().findItem(R.id.mn_logout).setVisible(true);
-                    navigationView.getMenu().findItem(R.id.mn_login).setVisible(false);
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new HomeFragment()).commit();
-                    navigationView.setCheckedItem(R.id.mn_home);
-                }
-                mDbRoot.removeEventListener(this);
             }
 
             @Override

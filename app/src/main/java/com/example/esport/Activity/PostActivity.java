@@ -133,12 +133,6 @@ public class PostActivity extends AppCompatActivity {
             });
 
         comment_option_btn = findViewById(R.id.option_comment_btn);
-//        comment_option_btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
 
         String picture = getIntent().getExtras().getString("picture");
         Glide.with(this).load(picture).into(content_img);

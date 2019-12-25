@@ -87,7 +87,7 @@ public class EditUserActivity extends AppCompatActivity {
                 UserInfo info = new UserInfo(email.getText().toString(), role_spin.getSelectedItem().toString(),
                         username.getText().toString(), userInfo.getAvatar());
                 info.setId(Uid);
-                mDbUser.child(Uid).setValue(info).addOnCompleteListener(new OnCompleteListener<Void>() {
+                mDbUser.child(Uid).child("userInfo").setValue(info).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {

@@ -1,5 +1,6 @@
 package com.example.esport.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.esport.E_News;
+import com.example.esport.Fragment.ExpandableListDataPump;
 import com.example.esport.R;
 import com.example.esport.UserInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,6 +35,8 @@ public class AddPostActivity extends AppCompatActivity {
     TextView title, content, picture;
     private DatabaseReference mDbRoot, mDbPost;
     private FirebaseDatabase firebaseDb;
+    int requestCode;
+    String Uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,35 @@ public class AddPostActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        addComponent();
+        Intent intent = getIntent();
+        requestCode = intent.getExtras().getInt("request");
+        if(requestCode==1){
+            Uid = intent.getStringExtra("post");
+            final E_News postInfo = ExpandableListDataPump.findPostByUID(Uid);
+            final String cata = intent.getStringExtra("cata");
+            switch (cata){
+                case "News":
+                    cata_spin.setSelection(0);
+                    break;
+                case "Champs":
+                    cata_spin.setSelection(1);
+                    break;
+                case "Items":
+                    cata_spin.setSelection(2);
+                    break;
+                case "Runes":
+                    cata_spin.setSelection(3);
+                    break;
+            }
+            title.setText(postInfo.getTitle());
+            content.setText(postInfo.getContent());
+            picture.setText(postInfo.getPicture());
+        }
+
+    }
+
+    private void addComponent() {
         cata_spin = findViewById(R.id.spinner_catalog);
         title = findViewById(R.id.edt_title);
         content = findViewById(R.id.edt_content);
@@ -80,19 +113,23 @@ public class AddPostActivity extends AppCompatActivity {
                                 content.getText().toString(),
                                 picture.getText().toString(),
                                 Calendar.getInstance().getTime());
-        String id = mDbPost.push().getKey();
+        String id;
+        if(requestCode==0)
+            id = mDbPost.push().getKey();
+        else
+            id = Uid;
         post.setId(id);
         mDbPost.child(id).setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(AddPostActivity.this,
-                            "Add Post Complete", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
-                    Toast.makeText(AddPostActivity.this,
-                            "Add failed", Toast.LENGTH_SHORT).show();
-                }
+            if (task.isSuccessful()) {
+                Toast.makeText(AddPostActivity.this,
+                        "Complete", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(AddPostActivity.this,
+                        "Failed", Toast.LENGTH_SHORT).show();
+            }
             }
         });
     }

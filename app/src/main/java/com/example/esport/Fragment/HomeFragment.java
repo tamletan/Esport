@@ -59,7 +59,9 @@ public class HomeFragment extends Fragment {
         root.findViewById(R.id.add_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), AddPostActivity.class));
+                Intent intent = new Intent(getContext(), AddPostActivity.class);
+                intent.putExtra("request", 0);
+                startActivity(intent);
             }
         });
         if (MainActivity.info != null && MainActivity.info.getRole().equals("employee"))

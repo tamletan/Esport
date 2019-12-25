@@ -11,11 +11,6 @@
         android:gravity="center"
         android:textSize="25dp"
         android:textStyle="bold" />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="search..."
-        android:textStyle="italic"/>
     <ExpandableListView
         android:id="@+id/expandableListView"
         android:layout_height="match_parent"
@@ -23,68 +18,4 @@
         android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="0.5dp" />
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="180dp"-->
-<!--        android:orientation="vertical">-->
-<!--        <TextView-->
-<!--            android:layout_width="150dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:text="ADMIN"-->
-<!--            android:gravity="center"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textSize="25dp"-->
-<!--            android:textColor="#fff"-->
-<!--            android:background="@color/red"/>-->
-
-<!--        <ListView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:background="@color/light_gray"/>-->
-
-<!--    </LinearLayout>-->
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="180dp"-->
-<!--        android:paddingTop="5dp"-->
-<!--        android:orientation="vertical">-->
-<!--        <TextView-->
-<!--            android:layout_width="150dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:text="EMPLOYEE"-->
-<!--            android:gravity="center"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textSize="25dp"-->
-<!--            android:textColor="#fff"-->
-<!--            android:background="@color/blue"/>-->
-
-<!--        <ListView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:background="@color/light_gray"/>-->
-
-
-<!--    </LinearLayout>-->
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:paddingTop="5dp"-->
-<!--        android:orientation="vertical">-->
-<!--        <TextView-->
-<!--            android:layout_width="150dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:text="USERS"-->
-<!--            android:gravity="center"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textSize="25dp"-->
-<!--            android:textColor="#fff"-->
-<!--            android:background="@color/green"/>-->
-
-<!--        <ListView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:background="@color/light_gray"/>-->
-
-
-<!--    </LinearLayout>-->
 </LinearLayout>

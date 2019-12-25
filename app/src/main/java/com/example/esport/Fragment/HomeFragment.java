@@ -1,5 +1,6 @@
 package com.example.esport.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.esport.Activity.AddPostActivity;
 import com.example.esport.Activity.MainActivity;
 import com.example.esport.Adapter.MyListAdapter;
 import com.example.esport.E_News;
@@ -30,7 +32,7 @@ import java.util.Calendar;
 public class HomeFragment extends Fragment {
     MyListAdapter adapter;
     ArrayList<E_News> newsList;
-    private DatabaseReference mDbRoot, mDbRef, mDbNews;
+    private DatabaseReference mDbRoot, mDbNews;
     private FirebaseDatabase firebaseDb;
     private LinearLayoutManager mLayoutManager;
     private RecyclerView mRvNewsList;
@@ -41,7 +43,7 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         firebaseDb = FirebaseDatabase.getInstance();
         mDbRoot = firebaseDb.getReference();
-        newsList = new ArrayList<E_News>();
+        newsList = new ArrayList<>();
         loadHomeFrag();
         mRvNewsList = root.findViewById(R.id.rv_news);
         adapter = new MyListAdapter(getActivity(), newsList);
@@ -57,7 +59,7 @@ public class HomeFragment extends Fragment {
         root.findViewById(R.id.add_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mRvNewsList.smoothScrollToPosition(0);
+                startActivity(new Intent(getContext(), AddPostActivity.class));
             }
         });
         if (MainActivity.info != null && MainActivity.info.getRole().equals("employee"))

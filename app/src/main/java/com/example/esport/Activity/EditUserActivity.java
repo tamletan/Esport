@@ -84,7 +84,7 @@ public class EditUserActivity extends AppCompatActivity {
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserInfo info = new UserInfo(email.getText().toString(), role_spin.getSelectedItem().toString(),
+                UserInfo info = new UserInfo(email.getText().toString(), role_spin.getSelectedItem().toString().toLowerCase(),
                         username.getText().toString(), userInfo.getAvatar());
                 info.setId(Uid);
                 mDbUser.child(Uid).child("userInfo").setValue(info).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/cardview_dark_background"
@@ -12,66 +13,11 @@
         android:gravity="center"
         android:textSize="25dp"
         android:textStyle="bold" />
-    <EditText
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/header"
+        android:id="@+id/list_comment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="search..."
-        android:textStyle="italic"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:weightSum="6">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="Category"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:textColor="#fff"
-            android:background="@color/gray"
-            android:layout_weight="4"/>
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="5dp"></LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:weightSum="6">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="Date"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:textColor="#fff"
-            android:background="@color/gray"
-            android:layout_weight="4"/>
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"/>
-    </LinearLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp">
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:background="@color/red"
-            android:textColor="#fff"
-            android:text="Filter"
-            android:layout_alignParentRight="true"/>
-    </RelativeLayout>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</LinearLayout>
+        android:layout_height="match_parent"
+        />
+</RelativeLayout>

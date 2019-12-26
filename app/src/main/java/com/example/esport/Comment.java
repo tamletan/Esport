@@ -3,26 +3,49 @@ package com.example.esport;
 import com.google.firebase.database.ServerValue;
 
 public class Comment {
-    private String content,uid,uname;
+    private String content;
+    private String uid;
+    private String uname;
+    private String cid;
+
+    private String pid;
     private Object timestamp;
 
 
     public Comment() {
     }
 
-    public Comment(String content, String uid, String uname) {
+    public Comment(String content, String uid, String uname, String pid) {
         this.content = content;
         this.uid = uid;
         this.uname = uname;
+        this.pid = pid;
         this.timestamp = ServerValue.TIMESTAMP;
 
     }
 
-    public Comment(String content, String uid, String uname, Object timestamp) {
+    public Comment(String content, String uid, String uname,String pid, Object timestamp) {
         this.content = content;
         this.uid = uid;
         this.uname = uname;
+        this.pid = pid;
         this.timestamp = timestamp;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
+
+    public String getCid() {
+        return cid;
+    }
+
+    public void setCid(String cid) {
+        this.cid = cid;
     }
 
     public String getContent() {

@@ -47,4 +47,5 @@
         <item>Employee</item>
         <item>User</item>
     </string-array>
+    <string name="title_activity_manage_comment">ManageCommentActivity</string> 
 </resources>

@@ -22,8 +22,10 @@ import com.bumptech.glide.Glide;
 import com.example.esport.Adapter.CommentAdapter;
 import com.example.esport.Comment;
 import com.example.esport.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,7 +42,6 @@ import java.util.List;
 public class PostActivity extends AppCompatActivity {
     ImageView content_img;
     TextView post_title, comment_option_btn;
-    FloatingActionButton fab;
     ScrollView scrollView;
     Button btnAddComment;
     FirebaseDatabase firebaseDatabase;
@@ -52,6 +53,7 @@ public class PostActivity extends AppCompatActivity {
     RecyclerView RvComment;
     CommentAdapter commentAdapter;
     List<Comment> listComment;
+    String TAG = ">>>>>>>";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,14 +72,7 @@ public class PostActivity extends AppCompatActivity {
         content_img = findViewById(R.id.content_img);
         Picasso.get().load(img).into(content_img);
         post_title = findViewById(R.id.post_title);
-        fab = findViewById(R.id.fab_top);
         scrollView = findViewById(R.id.scrollView);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scrollView.smoothScrollTo(0,0);
-            }
-        });
 
         RvComment = findViewById(R.id.rv_comment);
         btnAddComment = findViewById(R.id.post_add_comment_btn);
@@ -85,57 +80,45 @@ public class PostActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
-        // move add_cmt_btn up when typing comment
-        editTextComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ObjectAnimator animator = ObjectAnimator.ofFloat(fab, "translationY", -100f);
-                animator.setDuration(2000);
-                animator.start();
-            }
-        });
         // add Comment button listener
 
-            btnAddComment.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        btnAddComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                    if (firebaseUser != null) {
-                        //btnAddComment.setVisibility(View.INVISIBLE);
-                        if (editTextComment.getText().toString().trim().length() != 0) {
-                            Log.d(">>>>>", "onClick: "+editTextComment.getText());
-                            DatabaseReference commentReference = firebaseDatabase.getReference(COMMENT_KEY).child(PostKey).push();
-                            String comment_content = editTextComment.getText().toString();
-                            String uid = firebaseUser.getUid();
-                            String uname = MainActivity.getUsername();
-                            Comment comment = new Comment(comment_content, uid, uname);
+                if (firebaseUser != null) {
+                    //btnAddComment.setVisibility(View.INVISIBLE);
+                    if (editTextComment.getText().toString().trim().length() != 0) {
+                        Log.d(">>>>>", "onClick: "+editTextComment.getText());
+                        DatabaseReference commentReference = firebaseDatabase.getReference(COMMENT_KEY).child(PostKey).push();
+                        String comment_content = editTextComment.getText().toString();
+                        String uid = firebaseUser.getUid();
+                        String uname = MainActivity.getUsername();
+                        String pid = PostKey;
+                        Comment comment = new Comment(comment_content, uid, uname, pid);
 
-                            commentReference.setValue(comment).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    showMessage("comment added");
-                                    editTextComment.setText("");
-                                    btnAddComment.setVisibility(View.VISIBLE);
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    showMessage("fail to add comment : " + e.getMessage());
-                                }
-                            });
-                        } else {
-                            showMessage("Please type something");
-                        }
+                        commentReference.setValue(comment).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                showMessage("comment added");
+                                editTextComment.setText("");
+                                btnAddComment.setVisibility(View.VISIBLE);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                showMessage("fail to add comment : " + e.getMessage());
+                            }
+                        });
                     } else {
-                        showMessage("Please login to comment");
+                        showMessage("Please type something");
                     }
+                } else {
+                    showMessage("Please login to comment");
                 }
-            });
+            }
+        });
 
-        comment_option_btn = findViewById(R.id.option_comment_btn);
-
-        String picture = getIntent().getExtras().getString("picture");
-        Glide.with(this).load(picture).into(content_img);
         String title = getIntent().getExtras().getString("title");
         post_title.setText(title);
         PostKey = getIntent().getExtras().getString("id");
@@ -153,10 +136,12 @@ public class PostActivity extends AppCompatActivity {
                 listComment = new ArrayList<>();
                 for (DataSnapshot snapshot:dataSnapshot.getChildren()) {
                     Comment comment = snapshot.getValue(Comment.class);
+                    comment.setCid(snapshot.getKey());
+                    comment.setPid(PostKey);
                     listComment.add(comment);
                 }
 
-                commentAdapter = new CommentAdapter(getApplicationContext(), listComment);
+                commentAdapter = new CommentAdapter(PostActivity.this, listComment);
                 RvComment.setAdapter(commentAdapter);
             }
 
@@ -178,5 +163,23 @@ public class PostActivity extends AppCompatActivity {
 
         Toast.makeText(this,message,Toast.LENGTH_LONG).show();
 
+    }
+
+    public void editComment(Comment content) {
+        if (firebaseUser.getUid().equals(content.getUid())|| MainActivity.info.getRole().equals("employee")) {
+            firebaseDatabase.getReference().child(COMMENT_KEY).child(PostKey).child(content.getCid()).setValue(content);
+            iniRvComment();
+        } else {
+            showMessage("You don't have permission to do this");
+        }
+    }
+
+    public void deleteComment(Comment comment) {
+        if (firebaseUser.getUid().equals(comment.getUid()) || MainActivity.info.getRole().equals("employee")) {
+            firebaseDatabase.getReference().child(COMMENT_KEY).child(PostKey).child(comment.getCid()).setValue(null);
+            iniRvComment();
+        } else {
+            showMessage("You don't have permission to do this");
+        }
     }
 }

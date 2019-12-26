@@ -57,7 +57,7 @@ public class EditUserActivity extends AppCompatActivity {
         email.setText(userInfo.getEmail());
         if(userInfo.getRole().equals("admin"))
             role_spin.setSelection(0);
-        else if(userInfo.getRole().equals("eployee"))
+        else if(userInfo.getRole().equals("employee"))
             role_spin.setSelection(1);
         else if(userInfo.getRole().equals("user"))
             role_spin.setSelection(2);

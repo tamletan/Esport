@@ -31,32 +31,13 @@ public class UsersFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_users, container, false);
+        addComponent();
         expendlist();
         return root;
     }
 
-    private void expendlist() {
+    private void addComponent() {
         expandableListView = root.findViewById(R.id.expandableListView);
-        expandableListDetail = ExpandableListDataPump.getDataUser();
-        expandableListTitle = new ArrayList<>(expandableListDetail.keySet());
-        expandableListAdapter = new CustomExpandableListAdapter(getContext(), expandableListTitle, expandableListDetail);
-        expandableListView.setAdapter(expandableListAdapter);
-
-        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
-            @Override
-            public void onGroupExpand(int groupPosition) {
-
-            }
-        });
-        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-
-
-            }
-        });
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
@@ -69,5 +50,18 @@ public class UsersFragment extends Fragment {
                 return false;
             }
         });
+    }
+
+    private void expendlist() {
+        expandableListDetail = ExpandableListDataPump.getDataUser();
+        expandableListTitle = new ArrayList<>(expandableListDetail.keySet());
+        expandableListAdapter = new CustomExpandableListAdapter(getContext(), expandableListTitle, expandableListDetail);
+        expandableListView.setAdapter(expandableListAdapter);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        expendlist();
     }
 }

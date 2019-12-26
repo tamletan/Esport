@@ -106,10 +106,6 @@ public class HomeFragment extends Fragment {
                         }
                 );
         mDbNews = mDbRoot.child("news");
-        if(mDbNews == null)
-            Log.d("loaddata", "nullllllllll");
-        else
-            Log.d("loaddata", "nott null");
         mDbNews.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -117,7 +113,6 @@ public class HomeFragment extends Fragment {
 
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
                     E_News tD = d.getValue(E_News.class);
-
                     newsList.add(tD);
                 }
                 mDbNews.removeEventListener(this);
@@ -129,5 +124,11 @@ public class HomeFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
     }
 }

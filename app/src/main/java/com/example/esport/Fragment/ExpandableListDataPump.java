@@ -20,6 +20,7 @@ public class ExpandableListDataPump {
     static ArrayList<UserInfo> userInfos = new ArrayList<>();
     static ArrayList<E_News> postInfos = new ArrayList<>();
     public static HashMap<String, List<String>> getDataUser() {
+        userInfos.clear();
         HashMap<String, List<String>> expandableListDetail = new HashMap<>();
         final List<String> admin = new ArrayList<>();
         final List<String> employee = new ArrayList<>();
@@ -72,6 +73,7 @@ public class ExpandableListDataPump {
         return expandableListDetail;
     }
     public static HashMap<String, List<String>> getDataPost() {
+        postInfos.clear();
         HashMap<String, List<String>> expandableListDetail = new HashMap<>();
         final List<String> news = new ArrayList<>();
         final List<String> champs = new ArrayList<>();

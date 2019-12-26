@@ -25,37 +25,20 @@ import java.util.List;
 public class PostFragment extends Fragment {
     View root;
     ExpandableListView expandableListView;
-    ExpandableListAdapter expandableListAdapter;
+    CustomExpandableListAdapter expandableListAdapter;
     List<String> expandableListTitle;
     HashMap<String, List<String>> expandableListDetail;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_post, container, false);
+        addComponent();
         expendlist();
         return root;
     }
-    private void expendlist() {
+
+    private void addComponent() {
         expandableListView = root.findViewById(R.id.expandableListView);
-        expandableListDetail = ExpandableListDataPump.getDataPost();
-        expandableListTitle = new ArrayList<>(expandableListDetail.keySet());
-        expandableListAdapter = new CustomExpandableListAdapter(getContext(), expandableListTitle, expandableListDetail);
-        expandableListView.setAdapter(expandableListAdapter);
-        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
-            @Override
-            public void onGroupExpand(int groupPosition) {
-
-            }
-        });
-        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-
-
-            }
-        });
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
@@ -67,9 +50,22 @@ public class PostFragment extends Fragment {
                 intent.putExtra("post", Uid);
                 intent.putExtra("cata", expandableListTitle.get(groupPosition));
                 startActivity(intent);
-//                Toast.makeText(getContext(), expandableListDetail.get(expandableListTitle.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
+    }
+
+    private void expendlist() {
+        expandableListDetail = ExpandableListDataPump.getDataPost();
+        expandableListTitle = new ArrayList<>(expandableListDetail.keySet());
+        expandableListAdapter = new CustomExpandableListAdapter(getContext(),
+                expandableListTitle, expandableListDetail);
+        expandableListView.setAdapter(expandableListAdapter);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        expendlist();
     }
 }
